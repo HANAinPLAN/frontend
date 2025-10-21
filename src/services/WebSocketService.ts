@@ -81,7 +81,7 @@ class WebSocketService {
 
   constructor() {
     this.client = new Client({
-      webSocketFactory: () => new SockJS('/ws'),
+      webSocketFactory: () => new SockJS('https://hanainplan.kro.kr/ws'),
       connectHeaders: {},
       debug: (_str) => {
       },
