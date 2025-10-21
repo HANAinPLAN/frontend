@@ -10,7 +10,7 @@ export interface ScheduleEvent {
   type: 'consultation' | 'meeting' | 'other';
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+const API_BASE_URL = import.meta.env.VITE_BASE_URL || 'http://localhost:8080/api/';
 
 const getConsultantId = (): number => {
   const userStorage = localStorage.getItem('user-storage');
@@ -36,7 +36,7 @@ export const fetchSchedules = async (): Promise<ScheduleEvent[]> => {
   try {
     const consultantId = getConsultantId();
 
-    const response = await axios.get(`${API_BASE_URL}/api/consultant/schedules`, {
+    const response = await axios.get(`${API_BASE_URL}/consultant/schedules`, {
       params: { consultantId }
     });
 
@@ -69,7 +69,7 @@ export const createSchedule = async (event: Omit<ScheduleEvent, 'id'>): Promise<
     };
 
     const response = await axios.post(
-      `${API_BASE_URL}/api/consultant/schedules`,
+      `${API_BASE_URL}/consultant/schedules`,
       requestData,
       {
         params: { consultantId },
@@ -107,7 +107,7 @@ export const updateSchedule = async (eventId: string, event: Partial<ScheduleEve
     if (event.end) requestData.endTime = event.end;
 
     const response = await axios.put(
-      `${API_BASE_URL}/api/consultant/schedules/${eventId}`,
+      `${API_BASE_URL}/consultant/schedules/${eventId}`,
       requestData,
       {
         params: { consultantId },
@@ -136,7 +136,7 @@ export const deleteSchedule = async (eventId: string): Promise<void> => {
   try {
     const consultantId = getConsultantId();
 
-    await axios.delete(`${API_BASE_URL}/api/consultant/schedules/${eventId}`, {
+    await axios.delete(`${API_BASE_URL}/consultant/schedules/${eventId}`, {
       params: { consultantId }
     });
   } catch (error) {
@@ -149,7 +149,7 @@ export const fetchAvailableConsultantsAtTime = async (
   endTime: string
 ): Promise<number[]> => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/api/consultants/available-at-time`, {
+    const response = await axios.get(`${API_BASE_URL}/consultants/available-at-time`, {
       params: {
         startTime,
         endTime
