@@ -10,7 +10,7 @@ import type {
   FundTransactionStats,
 } from '../types/fund.types';
 
-const API_BASE_URL = 'http://localhost:8080/api/banking';
+const API_BASE_URL = import.meta.env.VITE_BASE_URL + 'api/banking';
 
 const fundApi = axios.create({
   baseURL: API_BASE_URL,
@@ -80,7 +80,7 @@ export const fundTransactionApi = {
   },
 };
 
-const HANA_BANK_URL = 'http://localhost:8081/api/hana';
+const HANA_BANK_URL = 'http://hana-production.up.railway.app/api/hana';
 
 export const hanaBankFundApi = {
   getCustomerSubscriptions: async (customerCi: string): Promise<FundSubscription[]> => {
