@@ -10,7 +10,7 @@ import type {
   FundTransactionStats,
 } from '../types/fund.types';
 
-const API_BASE_URL = import.meta.env.VITE_BASE_URL + 'api/banking';
+const API_BASE_URL = import.meta.env.VITE_BASE_URL + 'banking';
 
 const fundApi = axios.create({
   baseURL: API_BASE_URL,
